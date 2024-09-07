@@ -20,8 +20,8 @@ fs.readFile(link,'utf-8',(error,texto) => {
 function quebraEmParagrafo(texto){
     const paragrafo = texto.toLowerCase().split('\n'); // Retornando um Array com paragrafos separados.
     // Filtrando strings fazias.
-    const contagem = paragrafo.filter(paragrafo => paragrafo)
-        .map(paragrafo => {
+    const contagem = paragrafo.flatMap(paragrafo =>{
+        if(!paragrafo) return [];
         return verificaEContaPalavrasDuplicadas(paragrafo);
     })
     console.log(contagem); // Apresentando texto formatado.
