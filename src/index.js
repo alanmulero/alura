@@ -1,31 +1,38 @@
 // Contar número de palavras repetidas em um texto.
-const fs = require('fs'); // Manipulação de arquivos
-const caminho = process.argv; // Montando um Array de processos do terminal
-const link = caminho[2];
-const resultado = {};  // object[propriedade] = valor; Para apresentar o resultado.
+
+
+const resultado = {};  // object[propriedade] = valor. Para apresentar o resultado.
 
 // To do:
 /*
 1 - Criar um Array de palavras.
-2 - Criar as ocorrência das palavras.
-3 - Quebrar os paragrafos.
-4 - Disponibilizae resultado em um object
+2 - Criar as ocorrências das palavras.
+3 - Quebrar os parágrafos.
+4 - Disponibilizar resultado em um object
 */
-fs.readFile(link,'utf-8',(error,texto) => {
-    // chamando outa funçao
-    quebraEmParagrafo(texto);
+
     
-});
-// Quebrando em Paragrafos.
-function quebraEmParagrafo(texto){
-    const paragrafo = texto.toLowerCase().split('\n'); // Retornando um Array com paragrafos separados.
-    // Filtrando strings fazias.
+
+
+// Criando uma função mais abrangente, ponto de entrada.
+// Vai ser a unica função dentro do readFile.
+export function contaPalavras(texto){
+    const paragrafo = extraiParagrafos(texto);
     const contagem = paragrafo.flatMap(paragrafo =>{
         if(!paragrafo) return [];
         return verificaEContaPalavrasDuplicadas(paragrafo);
     })
     console.log(contagem); // Apresentando texto formatado.
+
 }
+
+// Refatorando quebraParagrafos()
+function extraiParagrafos(texto){
+    return  texto.toLowerCase().split('\n'); 
+
+}
+
+
 
 //Suprimindo caracteres especiais:
 function limpaPalavras(palavra){
@@ -44,3 +51,5 @@ function verificaEContaPalavrasDuplicadas(texto){
     return resultado;
     
 }
+console.log('Programa chegou ao fim.');
+
